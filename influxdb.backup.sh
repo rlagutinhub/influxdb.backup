@@ -19,7 +19,8 @@ INFLUX_BACKUP_DISK=$INFLUX_BACKUP_DIR
 INFLUX_BACKUP_DISK_THRESHOLD=10 # free space, percent %
 INFLUX_BACKUP_LOG=$INFLUX_BACKUP_DIR/$SCR_NAME.$(date +%Y.%m.%d_%H.%M.%S_%N).log
 
-MAILSERVER="mail.example.com"
+# MAILSERVER="mail.example.com"
+MAILSERVER="localhost"
 MAILPORT=25
 MAILFROM="$SCR_NAME <$HOSTNAME@example.com>"
 MAILTO="lagutin_ra@example.com"
@@ -91,10 +92,10 @@ function f_rotate() {
 # $2 = $INFLUX_BACKUP_RES
 function f_mailer(){
 
-    echo "helo $(hostname -f)"
-    echo "MAIL FROM: <$MAILFROM>"
-    echo "RCPT TO: <$MAILTO>"
-    echo "DATA"
+    echo "helo $(hostname -f)"; sleep 2
+    echo "MAIL FROM: <$MAILFROM>"; sleep 2
+    echo "RCPT TO: <$MAILTO>"; sleep 2
+    echo "DATA"; sleep 2
     echo "From: <$MAILFROM>"
     echo "To: <$MAILTO>"
     echo "Subject: $1 - $SCR_NAME"
@@ -102,7 +103,9 @@ function f_mailer(){
     echo
     echo "For more information look at log:"
     echo "$INFLUX_BACKUP_LOG"
+    sleep 4
     echo "."
+    sleep 4
     echo "quit"
 
 }
