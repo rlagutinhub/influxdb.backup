@@ -1,5 +1,5 @@
 # Influxdb OSS backup and restore
-
+```console
 Available options for influxdb backup script:
 
  -dbs | --databases   Sets list of databases to back up with the following parameters:
@@ -18,9 +18,7 @@ Available options for influxdb backup script:
 
 Note: Do not backup for db _internal, because it cannot be recovered from this backup.
 
- Example: 
- ```console
- ./influxdb.backup.sh -dbs -n "telegraf" -t 43200 -r 43200 -n "chronograf" -r 43200 -h "localhost" -p 8088
+ Example: ./influxdb.backup.sh -dbs -n "telegraf" -t 43200 -r 43200 -n "chronograf" -r 43200 -h "localhost" -p 8088
 ```
 
 ## Disaster recovery
