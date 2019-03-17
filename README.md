@@ -115,3 +115,5 @@ telegraf --test
 ```
 
 ---
+
+![alt text](https://github.com/rlagutinhub/influxdb.backup/blob/master/screen.png)
