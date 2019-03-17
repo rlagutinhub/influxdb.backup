@@ -1,7 +1,5 @@
 # Influxdb OSS backup and restore
 
-## Help
-
 Available options for influxdb backup script:
 
  -dbs | --databases   Sets list of databases to back up with the following parameters:
