@@ -68,7 +68,7 @@ influx -username 'admin' --password '' -host 'localhost'
 SHOW DATABASES
 exit
 ```
-#### manual restore security (db _internal data)
+#### manual restore security
 ```
 influx -username 'admin' --password '' -host 'localhost'
 CREATE USER "telegraf" WITH PASSWORD 'your-password'

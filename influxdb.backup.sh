@@ -16,7 +16,7 @@ SCR_DATE_BEFORE=$(date +%s)
 
 INFLUX_BACKUP_DIR=/backup
 INFLUX_BACKUP_DISK=$INFLUX_BACKUP_DIR
-INFLUX_BACKUP_DISK_THRESHOLD=10 # free space, precent %
+INFLUX_BACKUP_DISK_THRESHOLD=10 # free space, percent %
 INFLUX_BACKUP_LOG=$INFLUX_BACKUP_DIR/$SCR_NAME.$(date +%Y.%m.%d_%H.%M.%S_%N).log
 
 MAILSERVER="mail.example.com"
@@ -173,10 +173,10 @@ influx -username 'admin' --password '' -host 'localhost'
 SHOW USERS
 exit
 
-# restore db telegraf + retention policy
+# restore db telegraf (include retention policys and all shards)
 influxd restore -portable -db telegraf -host localhost:8088 path-to-backup
 
-# restore db chronograf + retention policy
+# restore db chronograf (include retention policys and all shards)
 influxd restore -portable -db chronograf -host localhost:8088 path-to-backup
 
 # check restored db
@@ -184,7 +184,7 @@ influx -username 'admin' --password '' -host 'localhost'
 SHOW DATABASES
 exit
 
-# manual restore security (db _internal data)
+# manual restore security
 influx -username 'admin' --password '' -host 'localhost'
 CREATE USER "telegraf" WITH PASSWORD 'your-password'
 CREATE USER "kapacitor" WITH PASSWORD 'your-password' WITH ALL PRIVILEGES
@@ -208,7 +208,7 @@ systemctl start chronograf.service
 systemctl start grafana-server.service
 systemctl start nginx.service
 
-# Troubleshooting client (after restore)
+# troubleshooting client (after restore)
 
 1. in chronograf status for this client - offline
 journalctl --full -u telegraf.service
