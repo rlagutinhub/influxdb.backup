@@ -56,7 +56,7 @@ influx -username 'admin' --password '' -host 'localhost'
 SHOW USERS
 exit
 ```
-# restore db telegraf + retention policy
+#### restore db telegraf (include retention policys and all shards)
 ```
 influxd restore -portable -db telegraf -host localhost:8088 path-to-backup
 ```
