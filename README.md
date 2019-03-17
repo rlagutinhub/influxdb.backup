@@ -1,7 +1,5 @@
 # Influxdb OSS backup and restore
 
----
-
 ## Help
 
 Available options for influxdb backup script:
@@ -27,11 +25,9 @@ Note: Do not backup for db _internal, because it cannot be recovered from this b
  ./influxdb.backup.sh -dbs -n "telegraf" -t 43200 -r 43200 -n "chronograf" -r 43200 -h "localhost" -p 8088
 ```
 
----
-
 ## Disaster recovery
-https://docs.influxdata.com/influxdb/v1.7/administration/backup_and_restore/
-https://www.influxdata.com/blog/new-features-in-open-source-backup-and-restore/
+* https://docs.influxdata.com/influxdb/v1.7/administration/backup_and_restore/
+* https://www.influxdata.com/blog/new-features-in-open-source-backup-and-restore/
 
 Important: If after restored status of clients is offline and they not sending new data, that is failed restore influxdb data!!!
 
@@ -64,7 +60,7 @@ exit
 ```
 influxd restore -portable -db telegraf -host localhost:8088 path-to-backup
 ```
-#### restore db chronograf + retention policy
+#### restore db chronograf (include retention policys and all shards)
 ```
 influxd restore -portable -db chronograf -host localhost:8088 path-to-backup
 ```
@@ -100,7 +96,7 @@ systemctl start chronograf.service
 systemctl start grafana-server.service
 systemctl start nginx.service
 ```
-#### Troubleshooting client (after restore)
+#### troubleshooting client (after restore)
 
 1. in chronograf status for this client - offline
 ```
@@ -119,3 +115,5 @@ curl -k -i http://influxdb.example.com:8086/ping # ok if return 204
 ```
 telegraf --test
 ```
+
+---
