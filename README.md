@@ -1,8 +1,8 @@
-## Influxdb OSS backup and restore
+# Influxdb OSS backup and restore
 
 ---
 
-# Help
+## Help
 
 Available options for influxdb backup script:
 
@@ -29,34 +29,32 @@ Note: Do not backup for db _internal, because it cannot be recovered from this b
 
 ---
 
-# Disaster recovery
+## Disaster recovery
 https://docs.influxdata.com/influxdb/v1.7/administration/backup_and_restore/
 https://www.influxdata.com/blog/new-features-in-open-source-backup-and-restore/
 
 Important: If after restored status of clients is offline and they not sending new data, that is failed restore influxdb data!!!
 
-# before required
+#### before required
 ```
 systemctl stop kapacitor.service
 systemctl stop chronograf.service
 systemctl stop grafana-server.service
 systemctl stop nginx.service
 ```
-# clear influxdb config
+#### clear influxdb config
 ```
 systemctl stop influxdb.service
 rm -rf /var/lib/influxdb/*
 systemctl start influxdb.service
 ```
-
-# create admin user
+#### create admin user
 ```
 influx
 CREATE USER "admin" WITH PASSWORD 'your-password' WITH ALL PRIVILEGES
 exit
 ```
-
-# check admin user
+#### check admin user
 ```
 influx -username 'admin' --password '' -host 'localhost'
 SHOW USERS
@@ -66,20 +64,17 @@ exit
 ```
 influxd restore -portable -db telegraf -host localhost:8088 path-to-backup
 ```
-
-# restore db chronograf + retention policy
+#### restore db chronograf + retention policy
 ```
 influxd restore -portable -db chronograf -host localhost:8088 path-to-backup
 ```
-
-# check restored db
+#### check restored db
 ```
 influx -username 'admin' --password '' -host 'localhost'
 SHOW DATABASES
 exit
 ```
-
-# manual restore security (db _internal data)
+#### manual restore security (db _internal data)
 ```
 influx -username 'admin' --password '' -host 'localhost'
 CREATE USER "telegraf" WITH PASSWORD 'your-password'
@@ -97,8 +92,7 @@ SHOW GRANTS FOR grafana
 SHOW USERS
 exit
 ```
-
-# after required
+#### after required
 ```
 systemctl restart influxdb.service
 systemctl start kapacitor.service
@@ -106,8 +100,7 @@ systemctl start chronograf.service
 systemctl start grafana-server.service
 systemctl start nginx.service
 ```
-
-# Troubleshooting client (after restore)
+#### Troubleshooting client (after restore)
 
 1. in chronograf status for this client - offline
 ```
